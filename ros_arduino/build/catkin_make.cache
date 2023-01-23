@@ -1,0 +1,2 @@
+
+-DCATKIN_DEVEL_PREFIX=/home/ohm/GithubRepos/ros_ws/ros_arduino/devel -DCMAKE_INSTALL_PREFIX=/home/ohm/GithubRepos/ros_ws/ros_arduino/install -G Unix Makefiles
