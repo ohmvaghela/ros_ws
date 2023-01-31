@@ -1,0 +1,8 @@
+prefix=/home/ohm/GithubRepos/ros_ws/bot_ws/install
+
+Name: bot_msg
+Description: Description of bot_msg
+Version: 0.0.0
+Cflags: -I${prefix}/include
+Libs: -L${prefix}/lib 
+Requires: 

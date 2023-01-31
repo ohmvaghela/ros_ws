@@ -1,0 +1,8 @@
+prefix=/home/ohm/GithubRepos/ros_ws/ros_arduino_ws/devel
+
+Name: exo_angle_control
+Description: Description of exo_angle_control
+Version: 0.0.0
+Cflags: -I/home/ohm/GithubRepos/ros_ws/ros_arduino_ws/devel/include
+Libs: -L${prefix}/lib 
+Requires: 

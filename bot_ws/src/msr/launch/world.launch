@@ -1,0 +1,43 @@
+<launch>
+
+<!-- ganeral -->
+  <arg name="model" />
+  <param name="robot_description" command="$(find xacro)/xacro --inorder $(find msr)/urdf/msr.urdf.xacro" />
+<!-- rviz -->
+
+  <node
+    name="joint_state_publisher_gui"
+    pkg="joint_state_publisher_gui"
+    type="joint_state_publisher_gui" />
+  <node
+    name="robot_state_publisher"
+    pkg="robot_state_publisher"
+    type="robot_state_publisher" />
+  <node
+    name="rviz"
+    pkg="rviz"
+    type="rviz"
+    args="-d $(find msr)/urdf.rviz" />
+
+<!-- gazebo -->
+  
+ <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="world_name" value="$(find msr)/world/myWorld.world"/>
+  </include>
+  <node
+    name="tf_footprint_base"
+    pkg="tf"
+    type="static_transform_publisher"
+    args="0 0 0 0 0 0 base_link base_footprint 40" />
+  <node 
+    pkg="gazebo_ros" 
+    type="spawn_model" 
+    name="spawn_urdf" 
+    args="-urdf -model msr_con -x 0 -y 0 -z 0.5 -param robot_description" />
+  <node
+    name="fake_joint_calibration"
+    pkg="rostopic"
+    type="rostopic"
+    args="pub /calibrated std_msgs/Bool true" />
+
+</launch>

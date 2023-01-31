@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<launch>
+
+  <!-- Load controller configuration -->
+  <rosparam command="load" file="$(find msr_mb)/config/control.yaml" />
+
+  <!-- Spawn controllers -->
+  <node name="base_controller_spawner" pkg="controller_manager" type="spawner"
+        args="msr_joint_publisher msr_velocity_controller"/>
+
+  <!-- Start EKF for localization -->
+  <!-- <group if="$(arg enable_ekf)" >
+    <node pkg="robot_localization" type="ekf_localization_node" name="ekf_localization">
+      <rosparam command="load" file="$(find msr_mb)/config/localization.yaml" />
+    </node>
+  </group> -->
+
+  <!-- <node pkg="interactive_marker_twist_server" type="marker_server" name="twist_marker_server" output="screen">
+    <param name="link_name" value="base_link" />
+  </node> -->
+
+</launch>

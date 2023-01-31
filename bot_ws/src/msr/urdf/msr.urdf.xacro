@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- This URDF was automatically created by SolidWorks to URDF Exporter! Originally created by Stephen Brawner (brawner@gmail.com) 
+     Commit Version: 1.6.0-4-g7f85cfe  Build Version: 1.6.7995.38578
+     For more information, please see http://wiki.ros.org/sw_urdf_exporter -->
+<robot name="msr" xmlns:xacro="http://ros.org/wiki/xacro">
+  
+  <xacro:include filename="$(find msr)/urdf/msr.gazebo.xacro"/>
+
+  <link name="base_link">
+    <inertial>
+      <origin
+        xyz="-8.73669186858481E-18 1.44637171351933E-06 -0.0237637406117088"
+        rpy="0 0 0" />
+      <mass
+        value="1.09205855733332" />
+      <inertia
+        ixx="0.00476506432987394"
+        ixy="5.02153093549206E-07"
+        ixz="-6.45628599175951E-21"
+        iyy="0.00207697842824223"
+        iyz="2.75344355502338E-19"
+        izz="0.00661717269474077" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://msr/meshes/base_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://msr/meshes/base_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="front_left">
+    <inertial>
+      <origin
+        xyz="2.42861286636753E-17 2.77555756156289E-17 -0.0255525062351154"
+        rpy="0 0 0" />
+      <mass
+        value="0.628243917892436" />
+      <inertia
+        ixx="0.000786474602916463"
+        ixy="5.42101086242752E-20"
+        ixz="2.164642910193E-19"
+        iyy="0.000786474602916463"
+        iyz="-1.79242202977043E-19"
+        izz="0.00129926747138072" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://msr/meshes/front_left.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.298039215686275 0.298039215686275 0.298039215686275 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://msr/meshes/front_left.STL" />
+      </geometry>
+    </collision>
+  </link>
+  
+  <joint name="front_left_joint"
+    type="continuous">
+    <origin
+      xyz="0.1235 -0.150886832667511 -0.033"
+      rpy="1.5707963267949 -1.17899991460539 -1.5707963267949" />
+    <parent
+      link="base_link" />
+    <child
+      link="front_left" />
+    <axis
+      xyz="0 0 1" />
+  </joint>
+  
+  <link name="front_right">
+    <inertial>
+      <origin
+        xyz="-5.55111512312578E-17 -4.16333634234434E-17 -0.0255525062351155"
+        rpy="0 0 0" />
+      <mass
+        value="0.628243917892436" />
+      <inertia
+        ixx="0.000786474602916463"
+        ixy="1.0842021724855E-19"
+        ixz="2.72172913425544E-20"
+        iyy="0.000786474602916463"
+        iyz="1.1686798084033E-20"
+        izz="0.00129926747138073" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://msr/meshes/front_right.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.298039215686275 0.298039215686275 0.298039215686275 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://msr/meshes/front_right.STL" />
+      </geometry>
+    </collision>
+  </link>
+  
+  <joint name="front_right_joint"
+    type="continuous">
+    <origin
+      xyz="-0.1235 -0.150886832667511 -0.033"
+      rpy="-1.5707963267949 0.591943593015272 -1.5707963267949" />
+    <parent
+      link="base_link" />
+    <child
+      link="front_right" />
+    <axis
+      xyz="0 0 1" />
+  </joint>
+  
+  <link name="back_left">
+    <inertial>
+      <origin
+        xyz="-5.55111512312578E-17 -5.55111512312578E-17 -0.0255525062351154"
+        rpy="0 0 0" />
+      <mass
+        value="0.628243917892436" />
+      <inertia
+        ixx="0.000786474602916463"
+        ixy="5.42101086242752E-20"
+        ixz="2.16447257019058E-19"
+        iyy="0.000786474602916463"
+        iyz="-1.79196690336017E-19"
+        izz="0.00129926747138072" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://msr/meshes/back_left.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.298039215686275 0.298039215686275 0.298039215686275 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://msr/meshes/back_left.STL" />
+      </geometry>
+    </collision>
+  </link>
+  
+  <joint name="back_left_joint"
+    type="continuous">
+    <origin
+      xyz="0.1235 0.150886832667511 -0.033"
+      rpy="1.5707963267949 -1.17899991460539 -1.5707963267949" />
+    <parent
+      link="base_link" />
+    <child
+      link="back_left" />
+    <axis
+      xyz="0 0 1" />
+  </joint>
+  
+  <link name="back_right">
+    <inertial>
+      <origin
+        xyz="-2.77555756156289E-17 -4.85722573273506E-17 -0.0255525062351155"
+        rpy="0 0 0" />
+      <mass
+        value="0.628243917892436" />
+      <inertia
+        ixx="0.000786474602916463"
+        ixy="-1.6978154312681E-20"
+        ixz="2.40982361339356E-20"
+        iyy="0.000786474602916463"
+        iyz="-5.86290186749809E-20"
+        izz="0.00129926747138072" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://msr/meshes/back_right.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.298039215686275 0.298039215686275 0.298039215686275 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://msr/meshes/back_right.STL" />
+      </geometry>
+    </collision>
+  </link>
+  
+  <joint name="back_right_joint"
+    type="continuous">
+    <origin
+      xyz="-0.1225 0.150886832667511 -0.033"
+      rpy="-1.5707963267949 0 -1.5707963267949" />
+    <parent
+      link="base_link" />
+    <child
+      link="back_right" />
+    <axis
+      xyz="0 0 1" />
+  </joint>
+
+
+ <joint name="imu_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="imu_link"/>
+    <origin xyz="-0.032 0 0.068" rpy="0 0 0"/>
+  </joint>
+
+  <link name="imu_link"/>
+
+  <joint name="scan_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="base_scan"/>
+    <origin xyz="-0.032 0 0.172" rpy="0 0 0"/>
+  </joint>
+
+  <link name="base_scan"/>
+
+
+</robot>

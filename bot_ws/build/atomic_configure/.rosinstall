@@ -1,0 +1,2 @@
+- setup-file:
+    local-name: /home/ohm/GithubRepos/ros_ws/bot_ws/devel/setup.sh
