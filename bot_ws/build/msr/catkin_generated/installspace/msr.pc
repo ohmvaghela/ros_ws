@@ -1,8 +1,0 @@
-prefix=/home/ohm/GithubRepos/ros_ws/bot_ws/install
-
-Name: msr
-Description: Description of msr
-Version: 1.0.0
-Cflags: 
-Libs: -L${prefix}/lib 
-Requires: urdf xacro

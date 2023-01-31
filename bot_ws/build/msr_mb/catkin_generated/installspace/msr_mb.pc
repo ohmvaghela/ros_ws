@@ -1,8 +1,0 @@
-prefix=/home/ohm/GithubRepos/ros_ws/bot_ws/install
-
-Name: msr_mb
-Description: Description of msr_mb
-Version: 0.0.0
-Cflags: 
-Libs: -L${prefix}/lib 
-Requires: 

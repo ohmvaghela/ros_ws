@@ -1,2 +1,0 @@
-bot_control:bot_gazebo:bot_msg:msr:msr_mb
--DCATKIN_DEVEL_PREFIX=/home/ohm/GithubRepos/ros_ws/bot_ws/devel -DCMAKE_INSTALL_PREFIX=/home/ohm/GithubRepos/ros_ws/bot_ws/install -G Unix Makefiles

@@ -1,8 +1,0 @@
-prefix=/home/ohm/GithubRepos/ros_ws/ros_arduino_ws/devel
-
-Name: msg_tester
-Description: Description of msg_tester
-Version: 0.0.0
-Cflags: -I/home/ohm/GithubRepos/ros_ws/ros_arduino_ws/devel/include
-Libs: -L${prefix}/lib 
-Requires: 
