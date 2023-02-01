@@ -14,6 +14,7 @@ roslaunch_add_file_check(launch)
 add_message_files(
   FILES
   ExoAngle.msg
+  ExoAngleChange.msg  
 )
 
 generate_messages(

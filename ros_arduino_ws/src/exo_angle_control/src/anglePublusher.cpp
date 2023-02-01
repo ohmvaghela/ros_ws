@@ -1,25 +1,45 @@
 #include "ros/ros.h"
 #include "std_msgs/String.h"
 #include "exo_angle_control/ExoAngle.h"
+#include "exo_angle_control/ExoAngleChange.h"
 #include <sstream>
 
 /**
  * This tutorial demonstrates simple sending of messages over the ROS system.
  */
-int main(int argc, char **argv)
-{
-    ros::init(argc, argv, "angleUpdate");
-
-    ros::NodeHandle n;
-
-    ros::Publisher angle_pub = n.advertise<exo_angle_control::ExoAngle>("desiredAngleTopic", 1000);
-
-    ros::Rate loop_rate(10);
 
     int hipLeft = 50;
     int hipRight = 50;
     int kneeLeft = 50;
     int kneeRight = 50;
+
+void chatterCallback(const exo_angle_control::ExoAngleChange &msg)
+{
+    ROS_INFO("I heard: [%i], [%i], [%i], [%i]", msg.hipLeft, msg.kneeRight, msg.kneeRight, msg.hipRight);
+    hipLeft = msg.hipLeft;
+    hipRight = msg.hipRight;
+    kneeLeft = msg.kneeLeft;
+    kneeRight = msg.kneeRight;
+}
+
+
+int main(int argc, char **argv)
+{
+    // general
+    ros::init(argc, argv, "angleUpdate");
+
+    ros::NodeHandle n;
+
+
+    // publisher
+    ros::Publisher angle_pub = n.advertise<exo_angle_control::ExoAngle>("desiredAngleTopic", 1000);
+
+    // subscriber
+    ros::Subscriber sub = n.subscribe("desiredAngleTopic", 1000, chatterCallback);
+
+    // genreal
+    ros::Rate loop_rate(10);
+
 
     while (ros::ok())
     {
