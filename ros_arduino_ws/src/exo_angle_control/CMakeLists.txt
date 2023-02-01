@@ -41,5 +41,5 @@ include_directories(
 )
 
 add_executable(anglePublusher src/anglePublusher.cpp)
-target_link_libraries(anglePublusher ${catkin_LIBRARIES})
+target_link_librawusher ${catkin_LIBRARIES})
 add_dependencies(anglePublusher exo_angle_control)

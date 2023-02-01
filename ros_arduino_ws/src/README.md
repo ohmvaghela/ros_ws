@@ -49,5 +49,9 @@ roslaunch exo_angle_control oneArduino.launch
 - For my case I am pusblising ros node `anglePublisher` of package `exo_angle_control`
 
 
-#
->
+# For all motors
+- edit port name in  `multipleArduino.launch`
+- Now run 
+```
+roslaunch exo_angle_control multipleArduino.launch
+```

@@ -1,0 +1,44 @@
+<launch>
+
+    <node 
+        name="anglePubNode" 
+        pkg="exo_angle_control" 
+        type="anglePublusher" 
+        ns="oneArduinoNs">
+    </node>
+        
+    <node 
+        name="arduinoSync" 
+        pkg="rosserial_python" 
+        type="serial_node.py" 
+        ns="oneArduinoNs" 
+        args="/dev/ttyACM0">
+    </node>
+
+    <node 
+        name="arduinoSync" 
+        pkg="rosserial_python" 
+        type="serial_node.py" 
+        ns="oneArduinoNs" 
+        args="/dev/ttyUSB0">
+    </node>
+        
+    <node 
+        name="arduinoSync" 
+        pkg="rosserial_python" 
+        type="serial_node.py" 
+        ns="oneArduinoNs" 
+        args="/dev/ttyUSB1">
+    </node>
+
+    <node 
+        name="arduinoSync" 
+        pkg="rosserial_python" 
+        type="serial_node.py" 
+        ns="oneArduinoNs" 
+        args="/dev/ttyUSB2">
+    </node>
+
+
+
+</launch>
