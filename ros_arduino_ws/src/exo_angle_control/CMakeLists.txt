@@ -6,7 +6,10 @@ find_package(catkin REQUIRED COMPONENTS
   rospy
   std_msgs
   message_generation
+  roslaunch
 )
+
+roslaunch_add_file_check(launch)
 
 add_message_files(
   FILES
