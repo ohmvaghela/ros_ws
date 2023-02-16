@@ -29,11 +29,8 @@ int main(int argc, char **argv)
 
     ros::NodeHandle n;
 
-    // publisher
-    ros::Publisher angle_pub = n.advertise<exo_angle_control::ExoAngle>("desiredAngleTopic", 1000);
-
     // subscriber
-    ros::Subscriber sub = n.subscribe("updateAngleTopic", 1000, chatterCallback);
+    ros::Subscriber sub = n.subscribe("encoderTopic", 1000, chatterCallback);
 
     // genreal
     ros::Rate loop_rate(10);

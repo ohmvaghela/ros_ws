@@ -1,21 +1,15 @@
 <launch>
 
-    <node name="anglePubNode" pkg="exo_angle_control" type="anglePublusher" ns="oneArduinoNs">
-    </node>
-
     <node name="arduinoSync1" pkg="rosserial_python" type="serial_node.py" ns="oneArduinoNs" args="/dev/ttyACM0">
     </node>
 
     <node name="arduinoSync2" pkg="rosserial_python" type="serial_node.py" ns="oneArduinoNs" args="/dev/ttyACM1">
     </node>
 
-    <node name="arduinoSync3" pkg="rosserial_python" type="serial_node.py" ns="oneArduinoNs" args="/dev/ttyACM2">
-    </node>
+    <!-- <node name="arduinoSync3" pkg="rosserial_python" type="serial_node.py" ns="oneArduinoNs" args="/dev/ttyACM2">
+    </node> -->
 
     <!-- <node name="arduinoSync4" pkg="rosserial_python" type="serial_node.py" ns="oneArduinoNs" args="/dev/ttyACM3"> -->
     <!-- </node> -->
-
-    <node name="slider" pkg="rqt_ez_publisher" type="rqt_ez_publisher" ns="oneArduinoNs" >
-    </node>
 
 </launch>
