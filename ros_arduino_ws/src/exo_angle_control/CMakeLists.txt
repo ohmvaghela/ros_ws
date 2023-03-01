@@ -51,3 +51,7 @@ add_dependencies(anglePublusher exo_angle_control)
 add_executable(anglePubSub src/anglePubSub.cpp)
 target_link_libraries(anglePubSub ${catkin_LIBRARIES} )
 add_dependencies(anglePubSub exo_angle_control)
+
+add_executable(speedTest src/speedTest.cpp)
+target_link_libraries(speedTest ${catkin_LIBRARIES} )
+add_dependencies(speedTest exo_angle_control)
