@@ -15,6 +15,10 @@ add_message_files(
   FILES
   ExoAngle.msg
   ExoAngleChange.msg  
+  EncoderHL.msg
+  EncoderHR.msg
+  EncoderKL.msg
+  EncoderKR.msg
 )
 
 generate_messages(

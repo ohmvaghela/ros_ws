@@ -13,6 +13,14 @@
 - build package
 
 # for using custom message 
+- 1st way go to arduio libaray folder
+    - Make sure to source both terminal 
+    1. roscore terminal 
+    2. in which you will run following code
+``` 
+rosrun rosserial_arduino make_libraries.py ./
+```
+
 - [link](http://wiki.ros.org/rosserial_arduino/Tutorials/Adding%20Custom%20Messages)
 - Create custom message in your env
 - Then run 
@@ -55,3 +63,16 @@ roslaunch exo_angle_control oneArduino.launch
 ```
 roslaunch exo_angle_control multipleArduino.launch
 ```
+
+# message types
+- ExoAngle.msg
+    - Contain 4 for each hip/knee left/right
+    - All are uint_32
+- ExoAngleChange.msg 
+    - Same as ExoAngle.msg
+    - Not used anywhere as of now
+### - EncoderHL.msg : Hip Left   : uint_32
+### - EncoderHR.msg : Hip Right  : uint_32 
+### - EncoderKL.msg : Knee Left  : uint_32 
+### - EncoderKR.msg : Knee Right : uint_32  
+ 

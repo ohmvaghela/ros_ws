@@ -1,0 +1,8 @@
+prefix=/home/exoskeleton/GitHubRepo/ros_ws/ros_arduino_ws/install
+
+Name: exo_angle_control
+Description: Description of exo_angle_control
+Version: 0.0.0
+Cflags: -I${prefix}/include
+Libs: -L${prefix}/lib 
+Requires: 
