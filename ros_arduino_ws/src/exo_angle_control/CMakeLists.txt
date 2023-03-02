@@ -55,3 +55,7 @@ add_dependencies(anglePubSub exo_angle_control)
 add_executable(speedTest src/speedTest.cpp)
 target_link_libraries(speedTest ${catkin_LIBRARIES} )
 add_dependencies(speedTest exo_angle_control)
+
+add_executable(dummyGait src/dummyGait.cpp)
+target_link_libraries(dummyGait ${catkin_LIBRARIES} )
+add_dependencies(dummyGait exo_angle_control)
