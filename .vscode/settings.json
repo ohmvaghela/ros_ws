@@ -4,5 +4,6 @@
         "chrono": "cpp",
         "random": "cpp",
         "limits": "cpp"
-    }
+    },
+    "cmake.sourceDirectory": "${workspaceFolder}/bot_ws/src/bot_control"
 }
