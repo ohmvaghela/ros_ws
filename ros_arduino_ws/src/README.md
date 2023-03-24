@@ -58,10 +58,10 @@ roslaunch exo_angle_control oneArduino.launch
 
 
 # For all motors
-- edit port name in  `multipleArduino.launch`
+- edit port name in  `oneArduino.launch`
 - Now run 
 ```
-roslaunch exo_angle_control multipleArduino.launch
+roslaunch exo_angle_control oneArduino.launch
 ```
 
 # message types

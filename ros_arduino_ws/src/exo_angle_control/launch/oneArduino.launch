@@ -1,15 +1,17 @@
 <launch>
 
-    <node name="anglePubNode" pkg="exo_angle_control" type="anglePubSub" ns="oneArduinoNs"/>
+    <node name="anglePubNode" pkg="exo_angle_control" type="dummyGait1" ns="oneArduinoNs"/>
     
-    <!-- <node name="arduinoSync0" pkg="rosserial_python" type="serial_node.py" ns="oneArduinoNs" args="/dev/ttyACM0"/>
+    <node name="arduinoSync0" pkg="rosserial_python" type="serial_node.py" ns="oneArduinoNs" args="/dev/ttyACM0" />
 
-    <node name="arduinoSync1" pkg="rosserial_python" type="serial_node.py" ns="oneArduinoNs" args="/dev/ttyACM1"/> -->
+    <node name="arduinoSync1" pkg="rosserial_python" type="serial_node.py" ns="oneArduinoNs" args="/dev/ttyACM1"/> 
 
     <node name="arduinoSync2" pkg="rosserial_python" type="serial_node.py" ns="oneArduinoNs" args="/dev/ttyACM2"/>
    
-    <node name="arduinoSync3" pkg="rosserial_python" type="serial_node.py" ns="oneArduinoNs" args="/dev/ttyACM3"/>
+    <node name="arduinoSync3" pkg="rosserial_python" type="serial_node.py" ns="oneArduinoNs" args="/dev/ttyUSB0"/>
 
     <node name="slider" pkg="rqt_ez_publisher" type="rqt_ez_publisher" ns="oneArduinoNs"/>
+
+
 
 </launch>

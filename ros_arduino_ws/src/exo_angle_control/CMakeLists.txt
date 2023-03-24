@@ -7,6 +7,8 @@ find_package(catkin REQUIRED COMPONENTS
   std_msgs
   message_generation
   roslaunch
+  controller_manager
+  hardware_interface
 )
 
 roslaunch_add_file_check(launch)
@@ -59,3 +61,11 @@ add_dependencies(speedTest exo_angle_control)
 add_executable(dummyGait src/dummyGait.cpp)
 target_link_libraries(dummyGait ${catkin_LIBRARIES} )
 add_dependencies(dummyGait exo_angle_control)
+
+add_executable(dummyGait1 src/dummyGait1.cpp)
+target_link_libraries(dummyGait1 ${catkin_LIBRARIES} )
+add_dependencies(dummyGait1 exo_angle_control)
+
+add_executable(servoHardwareInterface src/servoHardwareInterface.cpp)
+target_link_libraries(servoHardwareInterface ${catkin_LIBRARIES} )
+add_dependencies(servoHardwareInterface exo_angle_control)

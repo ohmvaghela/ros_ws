@@ -8,9 +8,9 @@
  * This tutorial demonstrates simple sending of messages over the ROS system.
  */
 
-int hipLeft =   0;
-int hipRight =  0;
-int kneeLeft =  0;
+int hipLeft = 0;
+int hipRight = 0;
+int kneeLeft = 0;
 int kneeRight = 0;
 
 void chatterCallback(const exo_angle_control::ExoAngleChange &msg)
