@@ -39,6 +39,14 @@ catkin_package(
 # 		DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}/${dir})
 # endforeach(dir)
 
+# add_library(${PROJECT_NAME}
+# src/ROScontrol1.cpp
+# include/ROScontrol1.h
+# )
+# target_link_libraries(${PROJECT_NAME}
+# ${catkin_LIBRARIES}
+# )
+
 include_directories(
 
   ${catkin_INCLUDE_DIRS}
@@ -59,3 +67,7 @@ add_dependencies(speedTest exo_angle_control)
 add_executable(dummyGait src/dummyGait.cpp)
 target_link_libraries(dummyGait ${catkin_LIBRARIES} )
 add_dependencies(dummyGait exo_angle_control)
+
+# add_executable(EffortController src/controller/EffortController.cpp)
+# target_link_libraries(EffortController ${catkin_LIBRARIES} )
+# add_dependencies(EffortController exo_angle_control)

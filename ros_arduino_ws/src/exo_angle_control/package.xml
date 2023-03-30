@@ -26,5 +26,6 @@
 
 
   <export>
+      <!-- <cpp cflags="-I${prefix}/include" lflags="-L${prefix}/lib -l${PROJECT_NAME}"/> -->
   </export>
 </package>
