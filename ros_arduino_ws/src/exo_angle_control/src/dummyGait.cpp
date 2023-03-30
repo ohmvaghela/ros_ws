@@ -16,7 +16,6 @@ void HLEncoderCallback(const exo_angle_control::EncoderHL &msg)
 {
     angleHL = msg.angle;
 }
-
 int main(int argc, char **argv)
 {
 

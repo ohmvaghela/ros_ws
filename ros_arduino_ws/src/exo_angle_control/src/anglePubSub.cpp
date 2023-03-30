@@ -3,7 +3,11 @@
 #include "exo_angle_control/ExoAngle.h"
 #include "exo_angle_control/ExoAngleChange.h"
 #include <sstream>
-
+#include "exo_angle_control/EncoderKL.h"
+#include "exo_angle_control/EncoderHL.h"
+#include "exo_angle_control/EncoderKR.h"
+#include "exo_angle_control/EncoderHR.h"
+#include <vector>
 /**
  * This tutorial demonstrates simple sending of messages over the ROS system.
  */
@@ -13,14 +17,19 @@ int hipRight = 0;
 int kneeLeft = 0;
 int kneeRight = 0;
 
-void chatterCallback(const exo_angle_control::ExoAngleChange &msg)
+// std::vector<int> encoder = {0,0,0,0};// HL, HR, KL, KR
+void ExoAngleCB(const exo_angle_control::ExoAngleChange &msg)
 {
-    ROS_INFO("I heard: [%i], [%i], [%i], [%i]", msg.hipLeft, msg.kneeRight, msg.kneeRight, msg.hipRight);
     hipLeft = msg.hipLeft;
     hipRight = msg.hipRight;
     kneeLeft = msg.kneeLeft;
     kneeRight = msg.kneeRight;
 }
+
+// void encoderHLCB(const exo_angle_control::EncoderKL &HL) {encoder[0] = HL.angle;}
+// void encoderHRCB(const exo_angle_control::EncoderKL &HR) {encoder[1] = HR.angle;}
+// void encoderKLCB(const exo_angle_control::EncoderKL &KL) {encoder[2] = KL.angle;}
+// void encoderKRCB(const exo_angle_control::EncoderKL &KR) {encoder[3] = KR.angle;}
 
 int main(int argc, char **argv)
 {
@@ -33,7 +42,12 @@ int main(int argc, char **argv)
     ros::Publisher angle_pub = n.advertise<exo_angle_control::ExoAngle>("desiredAngleTopic", 1000);
 
     // subscriber
-    ros::Subscriber sub = n.subscribe("updateAngleTopic", 1000, chatterCallback);
+    ros::Subscriber sub = n.subscribe("updateAngleTopic", 1000, ExoAngleCB);
+
+    // ros::Subscriber subHL = n.subscribe("updateHLTopic", 1000, encoderHLCB);
+    // ros::Subscriber subHR = n.subscribe("updateHRTopic", 1000, encoderHRCB);
+    // ros::Subscriber subKL = n.subscribe("updateKLTopic", 1000, encoderKLCB);
+    // ros::Subscriber subKR = n.subscribe("updateKRTopic", 1000, encoderKRCB);
 
     // genreal
     ros::Rate loop_rate(10);
