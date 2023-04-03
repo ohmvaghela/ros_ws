@@ -2,123 +2,112 @@
 #include "std_msgs/String.h"
 #include "exo_angle_control/ExoAngle.h"
 #include "exo_angle_control/ExoAngleChange.h"
+#include <sstream>
 #include "exo_angle_control/EncoderKL.h"
 #include "exo_angle_control/EncoderHL.h"
-#include <sstream>
+#include "exo_angle_control/EncoderKR.h"
+#include "exo_angle_control/EncoderHR.h"
+#include <vector>
+
+/**
+ * This tutorial demonstrates simple sending of messages over the ROS system.
+ */
+std::vector<int> angleEnc = {0, 0, 0, 0};
+exo_angle_control::ExoAngle desired_angle;
+int phase = 0; // max 7
 
 int angleKL = 0;
 int angleHL = 0;
+int angleKR = 0;
+int angleHR = 0;
+// callbacks
 void KLEncoderCallback(const exo_angle_control::EncoderKL &msg)
 {
-    angleKL = msg.angle;
+    // angleKL = msg.angle;
+    angleEnc[0] = msg.angle;
 }
 void HLEncoderCallback(const exo_angle_control::EncoderHL &msg)
 {
-    angleHL = msg.angle;
+    // angleHL = msg.angle;
+    angleEnc[1] = msg.angle;
 }
+void KREncoderCallback(const exo_angle_control::EncoderKR &msg)
+{
+    // angleKR = msg.angle;
+    angleEnc[2] = msg.angle;
+}
+void HREncoderCallback(const exo_angle_control::EncoderHR &msg)
+{
+    // angleHR = msg.angle;
+    angleEnc[3] = msg.angle;
+}
+
+void UpdateDesiredAngle(int phase)
+{
+    if (phase == 1)
+    {
+        desired_angle.hipLeft = 20;
+        desired_angle.hipRight = 20;
+        desired_angle.kneeLeft = 20;
+        desired_angle.kneeRight = 20;
+    }
+    if (phase == 2)
+    {
+        desired_angle.hipLeft = 340;
+        desired_angle.hipRight = 340;
+        desired_angle.kneeLeft = 340;
+        desired_angle.kneeRight = 340;
+    }
+}
+
 int main(int argc, char **argv)
 {
-
-    ros::init(argc, argv, "dummyGait");
+    ros::init(argc, argv, "dummyGiat");
     ros::NodeHandle n;
+    // ROS_INFO("namespace");
 
     ros::Publisher angle_pub = n.advertise<exo_angle_control::ExoAngle>("desiredAngleTopic", 1000);
-
-    ros::Subscriber encoder_sub_hip = n.subscribe("updateHLTopic", 1000, HLEncoderCallback);
-    ros::Subscriber encoder_sub_knee = n.subscribe("updateKLTopic", 1000, KLEncoderCallback);
+    // ros::Subscriber encoder_sub_hipL = n.subscribe("updateHLTopic", 1000, HLEncoderCallback);
+    // ros::Subscriber encoder_sub_kneeL = n.subscribe("updateKLTopic", 1000, KLEncoderCallback);
+    // ros::Subscriber encoder_sub_hipR = n.subscribe("updateHRTopic", 1000, HREncoderCallback);
+    // ros::Subscriber encoder_sub_kneeR = n.subscribe("updateKRTopic", 1000, KREncoderCallback);
 
     ros::Rate loop_rate(100);
 
-    exo_angle_control::ExoAngle desired_angle;
-    // currently knee 0 hip 1
-
-    // code for all phases for knee
-    // for hip make 2 condition
-    // if it reached forward at max then stop till knee complete its phases
-    // then make hip move backwards and same
-
-    // If hip reaches desired angle so it will stop automatically
-    // as error from desired angle will be nearly zero
-
-    //////////////////////////////////////////////
-    // first test it manually by moving it by hand
-    // oncorporate code for making motor move from standing position to phase 1
-    // then give delay of some time and then start gait motion
-    //////////////////////////////////////////////
+    ros::Time start_time = ros::Time::now();
+    ros::Time end_time = ros::Time::now();
+    ros::Duration duration = end_time - start_time;
 
     while (ros::ok())
     {
-        // initial setting
-        while (ros::ok() && (angleKL < 10) && (angleHL < 40))
+        while (ros::ok() && (duration.toSec() < 3))
         {
-            // desired angle is more then required as
-            // angle precision upto 3 degree
-            // hence if goal if 0 to 30 degree then it will reach 27 or 28 degree
 
-            desired_angle.hipLeft = 50;  // extra incorporated
-            desired_angle.kneeLeft = 20; // extra incorporated
-
+            UpdateDesiredAngle(1);
             angle_pub.publish(desired_angle);
+            ROS_INFO("1 : %f", duration.toSec());
+            end_time = ros::Time::now();
+            duration = end_time - start_time;
 
             ros::spinOnce();
             loop_rate.sleep();
         }
+        start_time = ros::Time::now();
+        duration = end_time - start_time;
 
-        // knee phase 1 (0 to 25 degree)| condition hip back
-        while (ros::ok() && (angleKL < 25))
+        while (ros::ok() && (duration.toSec() < 3))
         {
-            desired_angle.kneeLeft = 35; // extra incorporated
-            // publish hip angle for backmost position
-            desired_angle.hipLeft = 340; // extra incorporated
-
+            UpdateDesiredAngle(2);
             angle_pub.publish(desired_angle);
+            ROS_INFO("2: %f", duration.toSec());
+            end_time = ros::Time::now();
+            duration = end_time - start_time;
 
             ros::spinOnce();
             loop_rate.sleep();
         }
-
-        // knee phase 2 | condition hip back
-        while (ros::ok() && (angleKL > 10))
-        {
-            desired_angle.kneeLeft = 0;  // extra incorporated
-            desired_angle.hipLeft = 340; // extra incorporated
-
-            angle_pub.publish(desired_angle);
-
-            // publish hip angle for backmost position
-            ros::spinOnce();
-            loop_rate.sleep();
-        }
-
-        // knee phase 3 & 4 | condition hip front
-        while (ros::ok() && (angleKL < 75))
-        {
-            desired_angle.kneeLeft = 85; // extra incorporated
-            desired_angle.hipLeft = 45;  // extra incorporated
-
-            angle_pub.publish(desired_angle);
-
-            // publish hip angle for forward position
-            ros::spinOnce();
-            loop_rate.sleep();
-        }
-
-        // knee phase 5 | condition hip front
-        while (ros::ok() && (angleKL > 10))
-        {
-            // code here
-            desired_angle.kneeLeft = 0; // extra incorporated
-            desired_angle.hipLeft = 45; // extra incorporated
-
-            angle_pub.publish(desired_angle);
-            // publish hip angle for forward position
-            ros::spinOnce();
-            loop_rate.sleep();
-        }
-
-        ros::spinOnce();
-        loop_rate.sleep();
-
+        start_time = ros::Time::now();
+        duration = end_time - start_time;
     }
     return 0;
 }

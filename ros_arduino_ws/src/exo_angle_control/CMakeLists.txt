@@ -66,18 +66,23 @@ add_executable(dummyGait1 src/dummyGait1.cpp)
 target_link_libraries(dummyGait1 ${catkin_LIBRARIES} )
 add_dependencies(dummyGait1 exo_angle_control)
 
+
+add_executable(encoder src/encoder.cpp)
+target_link_libraries(encoder ${catkin_LIBRARIES} )
+add_dependencies(encoder exo_angle_control)
+
 # add_executable(servoHardwareInterface src/servoHardwareInterface.cpp)
 # target_link_libraries(servoHardwareInterface ${catkin_LIBRARIES} )
 # add_dependencies(servoHardwareInterface exo_angle_control)
 
-add_executable(hardware_if src/ros_control/hardware_if.cpp)
-target_link_libraries(hardware_if ${catkin_LIBRARIES} )
-add_dependencies(hardware_if exo_angle_control)
+# add_executable(hardware_if src/ros_control/hardware_if.cpp)
+# target_link_libraries(hardware_if ${catkin_LIBRARIES} )
+# add_dependencies(hardware_if exo_angle_control)
 
-install(TARGETS hardware_if
-  RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
-)
+# install(TARGETS hardware_if
+#   RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+# )
 
-install(FILES include/bldc_robot_hw.h
-  DESTINATION ${CATKIN_PACKAGE_INCLUDE_DESTINATION}
-)
+# install(FILES include/bldc_robot_hw.h
+#   DESTINATION ${CATKIN_PACKAGE_INCLUDE_DESTINATION}
+# )
