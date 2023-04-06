@@ -1,6 +1,6 @@
 <launch>
     <!-- <node name="encoder" pkg="exo_angle_control" type="encoder" ns="oneArduinoNs"/> -->
-    <!-- <node name="DummyGait" pkg="exo_angle_control" type="dummyGait1" ns="oneArduinoNs"/> -->
+    <node name="DummyGait" pkg="exo_angle_control" type="dummyGait1" ns="oneArduinoNs"/>
     
     <node name="arduinoSync0" pkg="rosserial_python" type="serial_node.py" ns="oneArduinoNs" args="/dev/ttyACM0" />
 

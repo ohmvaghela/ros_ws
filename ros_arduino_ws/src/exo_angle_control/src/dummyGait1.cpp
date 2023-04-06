@@ -8,7 +8,7 @@
 #include "exo_angle_control/EncoderKR.h"
 #include "exo_angle_control/EncoderHR.h"
 #include <vector>
-
+#include "stewart_msg/xyz.h"
 /**
  * This tutorial demonstrates simple sending of messages over the ROS system.
  */
