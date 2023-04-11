@@ -3,60 +3,62 @@
 #include "exo_angle_control/ExoAngle.h"
 #include "exo_angle_control/ExoAngleChange.h"
 #include <sstream>
+#include "exo_angle_control/EncoderKL.h"
+#include "exo_angle_control/EncoderHL.h"
+#include "exo_angle_control/EncoderKR.h"
+#include "exo_angle_control/EncoderHR.h"
+#include <vector>
 
 /**
  * This tutorial demonstrates simple sending of messages over the ROS system.
  */
-
-int hipLeft =   0;
-int hipRight =  0;
-int kneeLeft =  0;
-int kneeRight = 0;
-
-void chatterCallback(const exo_angle_control::ExoAngleChange &msg)
+std::vector<int> angleEnc = {0, 0, 0, 0};
+// callbacks
+void KLEncoderCallback(const exo_angle_control::EncoderKL &msg)
 {
-    ROS_INFO("I heard: [%i], [%i], [%i], [%i]", msg.hipLeft, msg.kneeRight, msg.kneeRight, msg.hipRight);
-    hipLeft = msg.hipLeft;
-    hipRight = msg.hipRight;
-    kneeLeft = msg.kneeLeft;
-    kneeRight = msg.kneeRight;
+    // angleKL = msg.angle;
+    angleEnc[0] = msg.angle;
+}
+void HLEncoderCallback(const exo_angle_control::EncoderHL &msg)
+{
+    // angleHL = msg.angle;
+    angleEnc[1] = msg.angle;
+}
+void KREncoderCallback(const exo_angle_control::EncoderKR &msg)
+{
+    // angleKR = msg.angle;
+    angleEnc[2] = msg.angle;
+}
+void HREncoderCallback(const exo_angle_control::EncoderHR &msg)
+{
+    // angleHR = msg.angle;
+    angleEnc[3] = msg.angle;
 }
 
 int main(int argc, char **argv)
 {
-    // general
-    ros::init(argc, argv, "angleUpdate");
-
+    ros::init(argc, argv, "encoder");
     ros::NodeHandle n;
+    // ROS_INFO("namespace");
 
-    // subscriber
-    ros::Subscriber sub = n.subscribe("encoderTopic", 1000, chatterCallback);
+    ros::Subscriber encoder_sub_hipL = n.subscribe("updateHLTopic", 1000, HLEncoderCallback);
+    ros::Subscriber encoder_sub_kneeL = n.subscribe("updateKLTopic", 1000, KLEncoderCallback);
+    ros::Subscriber encoder_sub_hipR = n.subscribe("updateHRTopic", 1000, HREncoderCallback);
+    ros::Subscriber encoder_sub_kneeR = n.subscribe("updateKRTopic", 1000, KREncoderCallback);
 
-    // genreal
-    ros::Rate loop_rate(10);
+    ros::Rate loop_rate(100);
+
+    ros::Time start_time = ros::Time::now();
+    ros::Time end_time = ros::Time::now();
+    ros::Duration duration = end_time - start_time;
 
     while (ros::ok())
     {
-        // angle
-        // msg_tester::Angle pub_angle;
-        // pub_angle.des_angle = cur_angle;
-        // angle_pub.publish(pub_angle);
-        // ROS_INFO("%i", pub_angle.des_angle);
-
-        exo_angle_control::ExoAngle des_angles;
-
-        des_angles.hipLeft = hipLeft;
-        des_angles.hipRight = hipRight;
-        des_angles.kneeLeft = kneeLeft;
-        des_angles.kneeRight = kneeRight;
-
-        angle_pub.publish(des_angles);
-        ROS_INFO("pubsub %i | %i | %i | %i ", des_angles.hipLeft, des_angles.hipRight, des_angles.kneeLeft, des_angles.kneeRight);
-
+        // print encoder input
+        ROS_INFO("%i, %i, %i, %i", angleEnc[0], angleEnc[1], angleEnc[2], angleEnc[3]);
+        
         ros::spinOnce();
-
         loop_rate.sleep();
     }
-
     return 0;
 }

@@ -60,12 +60,14 @@ target_link_libraries(dummyGait ${catkin_LIBRARIES} )
 
 add_executable(dummyGait1 src/dummyGait1.cpp)
 target_link_libraries(dummyGait1 ${catkin_LIBRARIES} )
+add_dependencies(dummyGait1 exo_angle_control)
 
 # add_executable(BLDCHardwareInterface src/BLDCHardwareInterface.cpp)
 # target_link_libraries(BLDCHardwareInterface ${catkin_LIBRARIES} )
 
 add_executable(hardware_if src/ros_control/hardware_if.cpp)
 target_link_libraries(hardware_if ${catkin_LIBRARIES} )
+add_dependencies(hardware_if exo_angle_control)
 
 # install(TARGETS hardware_if
 #   RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
