@@ -7,36 +7,36 @@
 #include "exo_angle_control/ExoAngle.h"
 
 
-class ServoMotor
+class BLDCmotor
 {
 public:
-    ServoMotor()
+    BLDCmotor()
     {
-        joint_state_interface.registerHandle(hardware_interface::JointStateHandle("servo_joint", &pos, &vel, &eff));
-        joint_effort_interface.registerHandle(hardware_interface::JointHandle(joint_state_interface.getHandle("servo_joint"), &cmd));
+        joint_state_interface.registerHandle(hardware_interface::JointStateHandle("BLDC_joint", &pos, &vel));
+        joint_vel_interface.registerHandle(hardware_interface::JointHandle(joint_vel_interface.getHandle("BLDC_joint"), &cmd));
         registerInterface(&joint_state_interface);
-        registerInterface(&joint_effort_interface);
+        registerInterface(&joint_vel_interface);
     }
 
     void write()
     {
         des_angles.hipLeft = pos;
-        des_angles.hipRight = 0;
-        des_angles.kneeLeft = 0;
-        des_angles.kneeRight = 0;
+        // des_angles.hipRight = 0;
+        // des_angles.kneeLeft = 0;
+        // des_angles.kneeRight = 0;
         angle_pub.publish(des_angles);
 
-        // Send command to the servo motor
-        // Use the cmd variable to control the servo
+        // Send command to the BLDC motor
+        // Use the cmd variable to control the BLDC
     }
 
 private:
     hardware_interface::JointStateInterface joint_state_interface;
-    hardware_interface::EffortJointInterface joint_effort_interface;
+    hardware_interface::VelocityJointInterface joint_vel_interface;
     double cmd = 0.0;
     double pos = 0.0;
     double vel = 0.0;
-    double eff = 0.0;
+    // double eff = 0.0;
     exo_angle_control::ExoAngle des_angles;
     des_angles.hipLeft = 0;
     des_angles.hipRight = 0;
@@ -47,13 +47,13 @@ private:
 
 int main(int argc, char **argv)
 {
-    ros::init(argc, argv, "servo_controller");
+    ros::init(argc, argv, "BLDC_controller");
     ros::NodeHandle n;
 
     ros::Publisher angle_pub = n.advertise<exo_angle_control::ExoAngle>("desiredAngleTopic", 1000);
 
-    ServoMotor servo_motor;
-    controller_manager::ControllerManager cm(&servo_motor);
+    BLDCmotor BLDC_motor;
+    controller_manager::ControllerManager cm(&BLDC_motor);
 
     ros::AsyncSpinner spinner(1);
     spinner.start();
@@ -67,7 +67,7 @@ int main(int argc, char **argv)
         const ros::Duration period = time - prev_time;
         prev_time = time;
 
-        servo_motor.write();
+        BLDC_motor.write();
         cm.update(time, period);
 
         rate.sleep();

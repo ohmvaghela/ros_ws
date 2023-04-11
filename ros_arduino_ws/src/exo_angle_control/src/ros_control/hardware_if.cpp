@@ -3,6 +3,7 @@
 #include <hardware_interface/joint_command_interface.h>
 #include <hardware_interface/joint_state_interface.h>
 // #include "bldc_robot_hw.h"
+#include <controller_manager/controller_manager.h>
 
 #include "exo_angle_control/EncoderHL.h"
 #include "exo_angle_control/EncoderKL.h"
@@ -84,7 +85,6 @@ public:
     }
   }
 
-private:
     
     void send_duty_cycle_command()
     {
@@ -95,13 +95,14 @@ private:
         msg.kneeRight = knee_right_duty_cycle_;
         desired_angle_pub_.publish(msg);
     }
+    ros::Publisher desired_angle_pub_;
+private:
    double hip_left_duty_cycle_;
     double hip_right_duty_cycle_;
     double knee_left_duty_cycle_;
     double knee_right_duty_cycle_;
     
     // Publisher for the desired angle message
-    ros::Publisher desired_angle_pub_;
     uint32_t hl_angle_;
     uint32_t kl_angle_;
     uint32_t kr_angle_;
