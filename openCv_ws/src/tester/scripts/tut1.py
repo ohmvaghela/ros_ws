@@ -1,22 +1,27 @@
 import cv2
 import sys
 import numpy as np
-logo_path = "/home/ohm/GitRepo/ros_ws/openCv_ws/src/tester/images/logo.png"
-rand_path = "/home/ohm/GitRepo/ros_ws/openCv_ws/src/tester/images/random.jpg"
-cat_path =  "/home/ohm/GitRepo/ros_ws/openCv_ws/src/tester/images/cat.jpeg"
-tree_path =  "/home/ohm/GitRepo/ros_ws/openCv_ws/src/tester/images/tree.jpg"
-noisy_path =  "/home/ohm/GitRepo/ros_ws/openCv_ws/src/tester/images/Noisy_image.png"
+import os
+from images import tones,tree, lines
+my_img = np.copy(tones)
 
-logo = cv2.imread(logo_path, 0)
-rnad = cv2.imread(rand_path, 1)
-cat = cv2.imread(cat_path,1)
-tree =cv2.imread(tree_path,0)
+def nothing(x):
+    pass
 
-h,w = tree.shape[:2]
-tree = cv2.resize(tree,(w//2,h//2))
-hitmiss = cv2.morphologyEx(logo,cv2.MORPH_HITMISS,(17,17))
-
-cv2.imshow("hitmiss",hitmiss)
-
+cv2.namedWindow("erode")
+cv2.createTrackbar("val","erode",1,10,nothing) 
+cv2.imshow("img",my_img) 
+erode = cv2.erode(my_img,(3,3))
 cv2.waitKey(0)
+while True:
+    cv2.imshow("erode",erode)
+
+    k = cv2.waitKey(1) & 0xFF
+    if k == 27:
+        break
+    k_size = cv2.getTrackbarPos('val','erode')
+    k_size_odd = (k_size*2) + 1
+    print(k_size_odd)
+    erode = cv2.erode(erode,(k_size_odd,k_size_odd))
 cv2.destroyAllWindows()
+
